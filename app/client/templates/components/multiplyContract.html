@@ -1,20 +1,20 @@
 <template name="components_multiplyContract">
     <div class="panel panel-default panel-dapp">
         <div class="panel-heading">
-            {{i18n 'dapp.components.multiplyContract.header'}}
+            <p>Option Trading</p> 
         </div>
         <div class="panel-body">
             {{#with TemplateVar.get 'state'}}
                 {{#if isError}}
                     <div class="alert alert-warning">
-                        There was an error deploying your contract.
-                        The error was: "{{error}}".
+                        契約のデプロイに失敗
+                        エラー :  "{{error}}".
                     </div>
                 {{/if}}
             
                 {{#if isMining}}
                     <div class="alert alert-info">
-                        Your contract is being mined...
+                        マイニング中...
                         <span class="badge text-right">
                             <i class="fa fa-cog fa-spin"></i>
                         </span>
@@ -23,48 +23,67 @@
             
                 {{#if isMined}}
                     <div class="alert alert-success">
-                        Your MultiplyContract has been mined!
+                        商品の登録が完了しました
                     </div>
-            
                     <hr />
-            
                     <label>
-                        Your contract has been deployed to this address:
+                        コントラクトのアドレス : 
                     </label>
-            
                     <input type="text" class="form-control" 
                            value="{{address}}" placeholder="Address" />
-            
                     <br />
-            
-                    <pre class="well well-info">{{source}}</pre>
-                    
                     <hr />
-            
-                    <label>
-                        Type a value here to multply:
-                    </label>
-            
-                    <input type="text"
-                            id="multiplyValue"
-                            class="form-control" 
-                            placeholder="{{i18n 'dapp.components.multiplyContract.placeholder'}}" />
-            
-                    <br />
-                    
-                    <p>
-                        Multiply Result: 
-                        <span>{{TemplateVar.get 'multiplyResult'}}</span>
-                    </p>
                 {{/if}}
             
                 {{#if isInactive}}
                     <p class="well well-info">
-                        {{i18n 'dapp.components.multiplyContract.description'}}
+                      商品情報を入力してください
                     </p>
-            
-                    <button type="button" class="btn btn-default btn-deploy">
-                        {{i18n 'dapp.components.multiplyContract.create'}}
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h4>商品情報</h4>
+                      </div>
+
+                      <form class="conditions">
+                      <table class="table">
+                        <tbody>
+                            <tr>
+                              <th scope="row">BTC価格</th>
+                              <td>
+                                <input type="text" name="price" placeholder="例：50,000円" />
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">BTC数量</th>
+                              <td>
+                                  <input type="text" name="amount" placeholder="例：1 BTC" />
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">実行日</th>
+                              <td>
+                                  <input type="text" name="exeday" placeholder="例：2016年4月25日" />
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">プレミアム</th>
+                              <td>
+                                  <input type="text" name="premium" placeholder="例：5,000円" />
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">ポジション</th>
+                              <td>
+                                  <input type="text" name="position" id="position" placeholder="例：buy" />
+                              </td>
+                            </tr>
+                        </tbody>
+                      </table>
+                      <input type="submit" class="btn btn-success" value="デリバティブ商品を登録する">
+                    </form>
+                    </div>
+                    <button type="button" class="btn btn-default">
+                      商品登録を完了する
                     </button>
                 {{/if}}
             {{/with}}
