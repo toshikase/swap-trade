@@ -1,3 +1,4 @@
+Contracts = new Mongo.Collection('contracts');
 /**
 Template Controllers
 
@@ -89,16 +90,18 @@ Template['components_multiplyContract'].events({
          var exeday = event.target.exeday.value;
          var premium = event.target.premium.value;
          var position = event.target.position.value;
+         
+         Meteor.call('insert_contracts', address, price, amount, exeday, premium, position);
           
          // test
-         Contracts.insert({
-           seller: address,
-           price: price,
-           amount: amount,
-           exeday: exeday,
-           premium: premium,
-           position: position
-         });
+//         Contracts.insert({
+//           seller: address,
+//           price: price,
+//           amount: amount,
+//           exeday: exeday,
+//           premium: premium,
+//           position: position
+//         });
 
       // estimate gas cost then transact new MultiplyContract
         web3.eth.estimateGas(transactionObject, function(err, estimateGas){
