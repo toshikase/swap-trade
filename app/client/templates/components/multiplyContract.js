@@ -52,6 +52,7 @@ Template['components_multiplyContract'].events({
 
 //  'submit .conditions': function(event) {
 //    event.preventDefault();
+//    console.log(MultiplyContract.abi);
 //    var price = event.target.price.value;
 //    var amount = event.target.amount.value;
 //    var exeday = event.target.exeday.value;
@@ -72,6 +73,9 @@ Template['components_multiplyContract'].events({
         // Set coinbase as the default account
         web3.eth.defaultAccount = web3.eth.coinbase;
 
+        // Get Abi definition
+        var abi = MultiplyContract.abi
+
         // assemble the tx object w/ default gas value
         var transactionObject = {
             data: MultiplyContract.bytecode, 
@@ -79,6 +83,7 @@ Template['components_multiplyContract'].events({
             gas: 5000000,
             from: web3.eth.accounts[0]
         };
+         var address = web3.eth.accounts[0];
          var price = event.target.price.value;
          var amount = event.target.amount.value;
          var exeday = event.target.exeday.value;
