@@ -64,8 +64,10 @@ Template['components_multiplyContract'].events({
 //    console.log(position);
 //    },
 
-	"click .btn-default": function(event, template){ // Create Contract
+//	"click .btn-default": function(event, template){ // Create Contract
+	"submit .conditions": function(event, template){ // Create Contract
         TemplateVar.set('state', {isMining: true});
+        event.preventDefault();
         
         // Set coinbase as the default account
         web3.eth.defaultAccount = web3.eth.coinbase;
@@ -77,14 +79,19 @@ Template['components_multiplyContract'].events({
             gas: 5000000,
             from: web3.eth.accounts[0]
         };
-       
+         var price = event.target.price.value;
+         var amount = event.target.amount.value;
+         var exeday = event.target.exeday.value;
+         var premium = event.target.premium.value;
+         var position = event.target.position.value;
+      
       // estimate gas cost then transact new MultiplyContract
         web3.eth.estimateGas(transactionObject, function(err, estimateGas){
             // multiply by 10 hack for testing
             if(!err)
                 transactionObject.gas = estimateGas * 10;
             
-            MultiplyContract.new(30, 20, 10, 10, 10, transactionObject, 
+            MultiplyContract.new(price, amount, exeday, premium, position, transactionObject, 
                                  function(err, contract){
                 if(err)
                     return TemplateVar.set(template, 'state', {isError: true, error: String(err)});
