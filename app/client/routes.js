@@ -49,3 +49,9 @@ Router.route('/view2', {
     template: 'views_view2',
     name: 'view2'
 });
+
+// Route for view3
+Router.route('/view3', {
+    template: 'views_view3',
+    name: 'view3'
+});

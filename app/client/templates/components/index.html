@@ -1,0 +1,51 @@
+<template name="components_index">
+  <!-- 商品一覧パネル -->
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4>デリバティブ商品一覧</h4>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>商品名</th>
+          <th>BTC価格</th>
+          <th>BTC数量</th>
+          <th>プレミアム</th>
+          <th>実行日</th>
+          <th>ポジション</th>
+          <th>取引実行</th>
+        </tr>
+      </thead>
+      <tbody>
+      <!-- 商品情報を配列で取得してきて繰り返しで並べる -->
+          <tr>
+            <td>デリバティブA</td>
+            <td>100 円</td>
+            <td>0.5 btc</td>
+            <td>10,000 円</td>
+            <td>2016-8-31</td>
+            <td>売り</td>
+            <td><button type="button" class="btn btn-success">buy</button>&nbsp;<button type="button" class="btn btn-warning">Sell</button></td>
+          </tr>
+          <tr>
+            <td>デリバティブB</td>
+            <td>100 円</td>
+            <td>0.5 btc</td>
+            <td>10,000 円</td>
+            <td>2016-8-31</td>
+            <td>売り</td>
+            <td><button type="button" class="btn btn-success">buy</button>&nbsp;<button type="button" class="btn btn-warning">Sell</button></td>
+          </tr>
+          <tr>
+            <td>デリバティブC</td>
+            <td>100 円</td>
+            <td>0.5 btc</td>
+            <td>10,000 円</td>
+            <td>2016-8-31</td>
+            <td>売り</td>
+            <td><button type="button" class="btn btn-success">buy</button>&nbsp;<button type="button" class="btn btn-warning">Sell</button></td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+</template>
