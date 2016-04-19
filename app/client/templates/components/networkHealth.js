@@ -1,3 +1,5 @@
+return web3.eth.coinbase;
+console.log(coinbase);
 /**
 Template Controllers
 

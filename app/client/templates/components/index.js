@@ -2,6 +2,10 @@ Template.components_index.helpers({
 //  accounts: function(){
 //    return EthAccounts.find({});
 //  }
+	'coinbase': function(){
+		return web3.eth.coinbase;
+	},
+
   contracts: function(){
     { _id: 100 }; // 動作テスト用
 //    return Contracts.find({}); //Contracts collectionから全て取得
