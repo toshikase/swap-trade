@@ -1,6 +1,6 @@
 <template name="components_multiplyContract">
     <div class="panel panel-default panel-dapp">
-        <div class="panel-heading">
+      <div class="panel-heading">
             <p>Option Trading</p> 
         </div>
         <div class="panel-body">
@@ -36,9 +36,13 @@
                 {{/if}}
             
                 {{#if isInactive}}
-                    <p class="well well-info">
-                      商品情報を入力してください
-                    </p>
+                    <ul>
+                      {{#each tasks}}
+                        {{> task}}
+                      {{/each}}
+                    </ul> 
+
+                    <p class="well well-info"> 商品情報を入力してください </p>
                     <div class="panel panel-default">
                       <div class="panel-heading">
                         <h4>商品情報</h4>
@@ -89,4 +93,8 @@
             {{/with}}
         </div>
     </div>
+</template>
+
+<template name="task">
+  <li>{{text}}</li>
 </template>

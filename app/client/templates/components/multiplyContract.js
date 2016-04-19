@@ -89,14 +89,24 @@ Template['components_multiplyContract'].events({
          var exeday = event.target.exeday.value;
          var premium = event.target.premium.value;
          var position = event.target.position.value;
-      
+          
+         // test
+         Contracts.insert({
+           seller: address,
+           price: price,
+           amount: amount,
+           exeday: exeday,
+           premium: premium,
+           position: position
+         });
+
       // estimate gas cost then transact new MultiplyContract
         web3.eth.estimateGas(transactionObject, function(err, estimateGas){
             // multiply by 10 hack for testing
             if(!err)
                 transactionObject.gas = estimateGas * 10;
             
-            MultiplyContract.new(price, amount, exeday, premium, position, transactionObject, 
+            MultiplyContract.new(address, price, amount, exeday, premium, position, transactionObject, 
                                  function(err, contract){
                 if(err)
                     return TemplateVar.set(template, 'state', {isError: true, error: String(err)});
@@ -107,6 +117,9 @@ Template['components_multiplyContract'].events({
                 }
             });
         });
+
+        // test
+        Contracts.find({});
 	},
 
     
