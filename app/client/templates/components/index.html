@@ -45,7 +45,25 @@
             <td>売り</td>
             <td><button type="button" class="btn btn-success">buy</button>&nbsp;<button type="button" class="btn btn-warning">Sell</button></td>
           </tr>
+            <!-- index.js からcontractsファンクションを取得して配列を繰り返し回す/現在機能していない -->
+            <!-- この辺りの参考: http://mmiyauchi.com/?p=756 -->
+            {{#each contracts}}
+              {{> contract}}
+            {{/each}}
       </tbody>
     </table>
   </div>
+</template>
+
+<template name="contract"> <!-- Contract コレクションの内容を表示/上記テンプレのcontractに埋め込まれる -->
+ <tr>
+  <td>{{_id}}</td>
+  <td>{{seller}}</td>
+  <td>{{price}}</td>
+  <td>{{amount}}</td>
+  <td>{{exeday}}</td>
+  <td>{{premium}}</td>
+  <td>{{position}}</td>
+  <td><button type="button" class="btn btn-success" id="{{account}} {{abi}}">購入</button></td> <!-- account と abi はindex.js で使う -->
+</tr>
 </template>
