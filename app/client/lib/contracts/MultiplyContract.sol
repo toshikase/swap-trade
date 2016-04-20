@@ -26,7 +26,7 @@ contract MultiplyContract{
       premium = _premium;
       exercise_date = _exercise_date;
     }
-    function issue (address _buyer, uint _buyer_jpy) {
+    function Respond (address _buyer, uint _buyer_jpy) {
       buyer = _buyer;
       balanceOfJPY[buyer] = _buyer_jpy;
       if (balanceOfJPY[buyer] < premium + btc_amount * btc_price) throw;
