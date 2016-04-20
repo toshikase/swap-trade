@@ -11,7 +11,7 @@ The app routes
 @constructor
 */
 
-// Change the URLS to use #! instead of real paths
+
 // Iron.Location.configure({useHashPaths: true});
 
 // Router defaults
@@ -54,4 +54,10 @@ Router.route('/view2', {
 Router.route('/view3', {
     template: 'views_view3',
     name: 'view3'
+});
+
+// Route for view4
+Router.route('/view4', {
+    template: 'views_view4',
+    name: 'view4'
 });
