@@ -91,7 +91,7 @@ Template['components_multiplyContract'].events({
          var premium = event.target.premium.value;
          var position = event.target.position.value;
          
-         Meteor.call('insert_contracts', address, price, amount, exeday, premium, position);
+         //Meteor.call('insert_contracts', address, price, amount, exeday, premium, position);
           
          // test
 //         Contracts.insert({
@@ -117,6 +117,8 @@ Template['components_multiplyContract'].events({
                 if(contract.address) {
                     TemplateVar.set(template, 'state', {isMined: true, address: contract.address, source: source});
                     contractInstance = contract;
+                    var contract_address = contract.address;
+                    Meteor.call('insert_contracts', address, price, amount, exeday, premium, position, contract_address, abi);
                 }
             });
         });
