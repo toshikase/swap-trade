@@ -1,6 +1,5 @@
 if (Meteor.isServer) {
   Meteor.startup(function () {
-    Contracts = new Mongo.Collection('contracts');
 
     Meteor.methods({
       'insert_contracts': function(address, price, amount, exeday, premium, position, contract_address, abi){
@@ -16,5 +15,14 @@ if (Meteor.isServer) {
          });
       }
     });
-  });
+// 
+// 下記メソッドを書いて、クライアント側から呼び出しても上手くいかない
+// コンソールから見ると、サーバー側では取得できている??
+//    Meteor.methods({
+//      'find_contracts': function(){
+//        console.log("called find_contracts method");
+//        return Contracts.find({});
+//    }
+//  });
+});
 };

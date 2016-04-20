@@ -1,4 +1,4 @@
-Contracts = new Mongo.Collection('contracts');
+//Contracts = new Mongo.Collection('contracts');
 /**
 Template Controllers
 
@@ -51,21 +51,6 @@ Template['components_multiplyContract'].events({
 	@event (click .btn-default)
 	*/
 
-//  'submit .conditions': function(event) {
-//    event.preventDefault();
-//    console.log(MultiplyContract.abi);
-//    var price = event.target.price.value;
-//    var amount = event.target.amount.value;
-//    var exeday = event.target.exeday.value;
-//    var premium = event.target.premium.value;
-//    var position = event.target.position.value;
-//    console.log(price);
-//    console.log(amount);
-//    console.log(exeday);
-//    console.log(premium);
-//    console.log(position);
-//    },
-
 //	"click .btn-default": function(event, template){ // Create Contract
 	"submit .conditions": function(event, template){ // Create Contract
         TemplateVar.set('state', {isMining: true});
@@ -91,18 +76,6 @@ Template['components_multiplyContract'].events({
          var premium = event.target.premium.value;
          var position = event.target.position.value;
          
-         //Meteor.call('insert_contracts', address, price, amount, exeday, premium, position);
-          
-         // test
-//         Contracts.insert({
-//           seller: address,
-//           price: price,
-//           amount: amount,
-//           exeday: exeday,
-//           premium: premium,
-//           position: position
-//         });
-
       // estimate gas cost then transact new MultiplyContract
         web3.eth.estimateGas(transactionObject, function(err, estimateGas){
             // multiply by 10 hack for testing
@@ -122,9 +95,6 @@ Template['components_multiplyContract'].events({
                 }
             });
         });
-
-        // test
-        Contracts.find({});
 	},
 
     

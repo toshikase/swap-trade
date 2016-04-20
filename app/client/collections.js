@@ -5,3 +5,4 @@
 // A test persitent collection
 MyCollection = new Mongo.Collection('mydb', {connection: null});
 new PersistentMinimongo(MyCollection);
+//Contracts = new Mongo.Collection('contracts');
