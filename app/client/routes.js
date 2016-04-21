@@ -61,3 +61,8 @@ Router.route('/view4', {
     template: 'views_view4',
     name: 'view4'
 });
+
+// Router.route('/view5', {
+//     template: 'views_view5',
+//     name: 'view5'
+// });
