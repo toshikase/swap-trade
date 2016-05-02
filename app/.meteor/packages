@@ -45,3 +45,4 @@ silentcicero:solc
 mike:mocha
 standard-minifier-css
 standard-minifier-js
+autopublish
