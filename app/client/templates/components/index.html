@@ -1,64 +1,66 @@
 <template name="components_index">
-  <!-- 商品一覧パネル -->
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4>デリバティブ商品一覧</h4>
-    </div>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>商品ID</th>
-          <th>売手アドレス</th>
-          <th>BTC価格</th>
-          <th>BTC数量</th>
-          <th>実行日</th>
-          <th>プレミアム</th>
-          <th>ポジション</th>
-          <th>取引実行</th>
-        </tr>
-      </thead>
-      <tbody>
-      <!-- 商品情報を配列で取得してきて繰り返しで並べる -->
-      <!-- 
-          <tr>
-            <td>デリバティブA</td>
-            <td>100 円</td>
-            <td>0.5 btc</td>
-            <td>10,000 円</td>
-            <td>2016-8-31</td>
-            <td>売り</td>
-            <td><button type="button" class="btn btn-success" id="0xcf69fcc3c34933191c54de8901d3c440db6d74fc">buy</button>&nbsp;<button type="button" class="btn btn-warning">Sell</button></td>
-          </tr>
-      -->
-         {{> contract}}
-      </tbody>
-    </table>
-  </div>
+    <!-- 商品一覧パネル -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4>デリバティブ商品一覧</h4>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>商品ID</th>
+                    <th>売手アドレス</th>
+                    <th>BTC価格</th>
+                    <th>BTC数量</th>
+                    <th>実行日</th>
+                    <th>プレミアム</th>
+                    <th>ポジション</th>
+                    <th>取引実行</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 商品情報を配列で取得してきて繰り返しで並べる -->
+                <!--
+                <tr>
+                <td>1</td>
+                <td>デリバティブA</td>
+                <td>0xfffe72483eb0bc804295af2416d2aeb4fa15a8bc</td>
+                <td>100 円</td>
+                <td>0.5 btc</td>
+                <td>10,000 円</td>
+                <td>2016-8-31</td>
+                <td>売り</td>
+                <td><button type="button" class="btn btn-success" id="0xcf69fcc3c34933191c54de8901d3c440db6d74fc">buy</button>&nbsp;<button type="button" class="btn btn-warning">Sell</button></td>
+            </tr>
+        -->
+        {{> contract}}
+    </tbody>
+</table>
+</div>
 </template>
 
 <!-- 上記の{{contract}}に格納 -->
 <template name="contract">
-  <tr>
-    <td>hoge</td>
-    <td>hoge</td>
-    <td>hoge</td>
-    <td>hoge</td>
-    <td>hoge</td>
-    <td>hoge</td>
-    <td>hoge</td>
-    <td><button type="button" class="btn btn-success" id="hoge">購入</button></td>
-  </tr>
-  <!-- index.js にcontractsのヘルパーを記載することで下記の{{}}内に変数が格納される -->
-  {{#each contracts}}
-  <tr>
-    <td>{{_id}}</td>
-    <td>{{seller}}</td>
-    <td>{{price}}</td>
-    <td>{{amount}}</td>
-    <td>{{exeday}}</td>
-    <td>{{premium}}</td>
-    <td>{{position}}</td>
-    <td><button type="button" class="btn btn-success" id="{{contract_address}}">購入</button></td>
-  </tr>
-  {{/each}}
+    <tr>
+        <td>1</td>
+        <td>0xfffe72483eb0bc804295af2416d2aeb4fa15a8bc</td>
+        <td>100 円</td>
+        <td>0.5 btc</td>
+        <td>2016-8-31</td>
+        <td>10,000 円</td>
+        <td>売り</td>
+        <td><button type="button" class="btn btn-success" id="hoge">購入</button></td>
+    </tr>
+    <!-- index.js にcontractsのヘルパーを記載することで下記の{{}}内に変数が格納される -->
+    {{#each contracts}}
+    <tr>
+        <td>{{_id}}</td>
+        <td>{{seller}}</td>
+        <td>{{price}}</td>
+        <td>{{amount}}</td>
+        <td>{{exeday}}</td>
+        <td>{{premium}}</td>
+        <td>{{position}}</td>
+        <td><button type="button" class="btn btn-success" id="{{contract_address}}">購入</button></td>
+    </tr>
+    {{/each}}
 </template>

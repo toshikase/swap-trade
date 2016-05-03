@@ -1,86 +1,86 @@
 <template name="components_multiplyContract">
     <div class="panel panel-default panel-dapp">
-      <div class="panel-heading">
-            <p>Option Trading</p> 
+        <div class="panel-heading">
+            <p>Option Trading</p>
         </div>
         <div class="panel-body">
             {{#with TemplateVar.get 'state'}}
-                {{#if isError}}
-                    <div class="alert alert-warning">
-                        契約のデプロイに失敗
-                        エラー :  "{{error}}".
-                    </div>
-                {{/if}}
-            
-                {{#if isMining}}
-                    <div class="alert alert-info">
-                        マイニング中...
-                        <span class="badge text-right">
-                            <i class="fa fa-cog fa-spin"></i>
-                        </span>
-                    </div>
-                {{/if}}
-            
-                {{#if isMined}}
-                    <div class="alert alert-success">
-                        商品の登録が完了しました
-                    </div>
-                    <hr />
-                    <label>
-                        コントラクトのアドレス : 
-                    </label>
-                    <input type="text" class="form-control" 
-                           value="{{address}}" placeholder="Address" />
-                    <br />
-                    <hr />
-                {{/if}}
-            
-                {{#if isInactive}}
-                    <p class="well well-info"> 商品情報を入力してください </p>
-                    <form class="conditions">
-                      <div class="panel panel-default">
-                        <div class="panel-heading">
-                          <h4>商品情報</h4>
-                        </div>
+            {{#if isError}}
+            <div class="alert alert-warning">
+                契約のデプロイに失敗
+                エラー :  "{{error}}".
+            </div>
+            {{/if}}
 
-                        <table class="table main">
-                          <tbody>
-                              <tr>
+            {{#if isMining}}
+            <div class="alert alert-info">
+                マイニング中...
+                <span class="badge text-right">
+                    <i class="fa fa-cog fa-spin"></i>
+                </span>
+            </div>
+            {{/if}}
+
+            {{#if isMined}}
+            <div class="alert alert-success">
+                商品の登録が完了しました
+            </div>
+            <hr />
+            <label>
+                コントラクトのアドレス :
+            </label>
+            <input type="text" class="form-control"
+            value="{{address}}" placeholder="Address" />
+            <br />
+            <hr />
+            {{/if}}
+
+            {{#if isInactive}}
+            <p class="well well-info"> 商品情報を入力してください </p>
+            <form class="conditions">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>商品情報</h4>
+                    </div>
+
+                    <table class="table main">
+                        <tbody>
+                            <tr>
                                 <th scope="row">BTC価格</th>
                                 <td>
-                                  <input type="text" name="price" placeholder="例：50,000円" />
+                                    <input type="text" name="price" placeholder="例：50,000円" />
                                 </td>
-                              </tr>
-                              <tr>
+                            </tr>
+                            <tr>
                                 <th scope="row">BTC数量</th>
                                 <td>
                                     <input type="text" name="amount" placeholder="例：1 BTC" />
                                 </td>
-                              </tr>
-                              <tr>
+                            </tr>
+                            <tr>
                                 <th scope="row">実行日</th>
                                 <td>
                                     <input type="text" name="exeday" placeholder="例：2016年4月25日" />
                                 </td>
-                              </tr>
-                              <tr>
+                            </tr>
+                            <tr>
                                 <th scope="row">プレミアム</th>
                                 <td>
                                     <input type="text" name="premium" placeholder="例：5,000円" />
                                 </td>
-                              </tr>
-                              <tr>
+                            </tr>
+                            <tr>
                                 <th scope="row">ポジション</th>
                                 <td>
                                     <input type="text" name="position" id="position" placeholder="例：buy" />
                                 </td>
-                              </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <input type="submit" class="btn btn-default center-block" value="デリバティブ商品を登録する">
-                    </form>
-                {{/if}}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <input type="submit" class="btn btn-default center-block" value="デリバティブ商品を登録する">
+            </form>
+            {{/if}}
             {{/with}}
         </div>
     </div>

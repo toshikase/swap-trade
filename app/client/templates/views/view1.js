@@ -12,18 +12,18 @@ The view1 template
 */
 
 Template['views_view1'].helpers({
-    /**
-    Get the name
+  /**
+  Get the name
 
-    @method (name)
-    */
+  @method (name)
+  */
 
-    'name': function(){
-        return this.name || TAPi18n.__('dapp.view1.defaultName');
-    }
+  'name': function(){
+    return this.name || TAPi18n.__('dapp.view1.defaultName');
+  }
 });
 
 // When the template is created
 Template['views_view1'].onCreated(function(){
-	Meta.setSuffix(TAPi18n.__("dapp.view1.title"));
+  Meta.setSuffix(TAPi18n.__("dapp.view1.title"));
 });

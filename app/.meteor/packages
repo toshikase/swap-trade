@@ -45,3 +45,5 @@ silentcicero:solc
 mike:mocha
 standard-minifier-css
 standard-minifier-js
+percolatestudio:synced-cron
+mrt:cron
