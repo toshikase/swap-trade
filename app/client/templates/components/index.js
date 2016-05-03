@@ -41,8 +41,9 @@
 // 取得したいが、動作しない
 Template.contract.helpers({
   contracts: function(){
+
    return contracts;
-//   return Contracts.find();
+//   return Contracts.find(); 
   }
 
 // 下記のように、サーバーサイドで定義した `find_contracts` メソッドを呼び出してもうまくいかない
