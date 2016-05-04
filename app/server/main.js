@@ -4,7 +4,7 @@ if (Meteor.isServer) {
     Meteor.methods({
       'insert_transactions': function(address, price, amount, exeday, premium, position, contract_address, abi, buy_date, done){
         Transactions.insert({
-          seller: address,
+          seller: seller,
           price: price,
           amount: amount,
           exeday: exeday,
