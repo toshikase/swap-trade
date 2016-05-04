@@ -63,6 +63,7 @@ Template['components_multiplyContract'].events({
 
     // Get Abi definition
     var abi = MultiplyContract.abi
+    console.log(abi)
 
     // assemble the tx object w/ default gas value
     var transactionObject = {
@@ -81,7 +82,7 @@ Template['components_multiplyContract'].events({
     var position = event.target.position.value;
 
     var exeDate = new Date(exeMonth + "/" + exeDay + "/" + exeYear);
-    var parseExeDate = Date.parse(date);
+    var parseExeDate = Date.parse(exeDate);
 
     // estimate gas cost then transact new MultiplyContract
     web3.eth.estimateGas(transactionObject, function(err, estimateGas){
@@ -98,7 +99,7 @@ Template['components_multiplyContract'].events({
             TemplateVar.set(template, 'state', {isMined: true, address: contract.address, source: source});
             contractInstance = contract;
             var contract_address = contract.address;
-            Meteor.call('insert_contracts', address, price, amount, exeday, premium, position, contract_address, abi);
+            Meteor.call('insert_contracts', address, price, amount, parseExeDate, premium, position, contract_address, abi);
           }
         });
       });
