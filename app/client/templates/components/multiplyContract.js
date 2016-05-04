@@ -72,7 +72,7 @@ Template['components_multiplyContract'].events({
       gas: 5000000,
       from: web3.eth.accounts[0]
     };
-    var address = web3.eth.accounts[0];
+    var seller = web3.eth.accounts[0];
     var price = event.target.price.value;
     var amount = event.target.amount.value;
     var exeYear = event.target.exeYear.value;
@@ -99,7 +99,7 @@ Template['components_multiplyContract'].events({
             TemplateVar.set(template, 'state', {isMined: true, address: contract.address, source: source});
             contractInstance = contract;
             var contract_address = contract.address;
-            Meteor.call('insert_contracts', address, price, amount, parseExeDate, premium, position, contract_address, abi);
+            Meteor.call('insert_contracts', seller, price, amount, parseExeDate, premium, position, contract_address, abi);
           }
         });
       });
