@@ -28,8 +28,11 @@ Template.contract.events({
     var premium = $(event.target).parent().prevAll().eq(1).text();
     var position = $(event.target).parent().prevAll().eq(0).text();
     var buy_date = new Date(); // 購入日データ
-    var buy_date = buy_date.getTime(); // 購入日データ
     var done = "false";  //実行されたらtrueになる
     Meteor.call('update_contracts', _id, seller, price, amount, exeday, premium, position, contract_address, abi, buy_date, done, transaction_address);
+
+    //ボタンの書き換え
+    $(event.target).removeClass("btn-success").addClass("btn-default");
+    $(event.target).text("購入済");
   }
 });
