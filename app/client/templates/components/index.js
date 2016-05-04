@@ -13,13 +13,13 @@ Template.contract.events({
     event.preventDefault();
 
     // get abi & contract_address
-    // var abi = MultiplyContract.abi;
-    // var contract_address = $(event.target).attr('id');
-    // send transaction to contract
+    var abi = MultiplyContract.abi;
+    var contract_address = $(event.target).attr('id');
+    //send transaction to contract
     // accountはunlockしていないとエラーになる
-    // var cnt = web3.eth.contract(abi).at(contract_address);
-    // var result = cnt.Respond.sendTransaction(web3.eth.accounts[0], 100000, {from: web3.eth.accounts[0], gas:500000});
-    // alert( "購入が完了しました!!\nトランザクションアドレスは" + result );
+    var cnt = web3.eth.contract(abi).at(contract_address);
+    var result = cnt.Respond.sendTransaction(web3.eth.accounts[0], 100000, {from: web3.eth.accounts[0], gas:500000});
+    alert( "購入が完了しました!!\nトランザクションアドレスは" + result );
 
     // 以下、transaction collection機能の実装
     var buy_date = new Date(); // 購入日データ
