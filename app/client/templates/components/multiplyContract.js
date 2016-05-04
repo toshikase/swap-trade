@@ -51,51 +51,51 @@ Template['components_multiplyContract'].events({
 	@event (click .btn-default)
 	*/
 
-//	"click .btn-default": function(event, template){ // Create Contract
-	"submit .conditions": function(event, template){ // Create Contract
-        TemplateVar.set('state', {isMining: true});
-        event.preventDefault();
-        
-        // Set coinbase as the default account
-        web3.eth.defaultAccount = web3.eth.coinbase;
+  //	"click .btn-default": function(event, template){ // Create Contract
+  "submit .conditions": function(event, template){ // Create Contract
+    TemplateVar.set('state', {isMining: true});
+    event.preventDefault();
 
-        // Get Abi definition
-        var abi = MultiplyContract.abi
+    // Set coinbase as the default account
+    web3.eth.defaultAccount = web3.eth.coinbase;
 
-        // assemble the tx object w/ default gas value
-        var transactionObject = {
-            data: MultiplyContract.bytecode, 
-            gasPrice: web3.eth.gasPrice,
-            gas: 5000000,
-            from: web3.eth.accounts[0]
-        };
-         var address = web3.eth.accounts[0];
-         var price = event.target.price.value;
-         var amount = event.target.amount.value;
-         var exeday = event.target.exeday.value;
-         var premium = event.target.premium.value;
-         var position = event.target.position.value;
-         
-      // estimate gas cost then transact new MultiplyContract
-        web3.eth.estimateGas(transactionObject, function(err, estimateGas){
-            // multiply by 10 hack for testing
-            if(!err)
-                transactionObject.gas = estimateGas * 10;
-            
-            MultiplyContract.new(address, price, amount, exeday, premium, position, transactionObject, 
-                                 function(err, contract){
-                if(err)
-                    return TemplateVar.set(template, 'state', {isError: true, error: String(err)});
-                
-                if(contract.address) {
-                    TemplateVar.set(template, 'state', {isMined: true, address: contract.address, source: source});
-                    contractInstance = contract;
-                    var contract_address = contract.address;
-                    Meteor.call('insert_contracts', address, price, amount, exeday, premium, position, contract_address, abi);
-                }
-            });
-        });
-	},
+    // Get Abi definition
+    var abi = MultiplyContract.abi
+
+      // assemble the tx object w/ default gas value
+      var transactionObject = {
+        data: MultiplyContract.bytecode, 
+        gasPrice: web3.eth.gasPrice,
+        gas: 5000000,
+        from: web3.eth.accounts[0]
+      };
+    var address = web3.eth.accounts[0];
+    var price = event.target.price.value;
+    var amount = event.target.amount.value;
+    var exeday = event.target.exeday.value;
+    var premium = event.target.premium.value;
+    var position = event.target.position.value;
+
+    // estimate gas cost then transact new MultiplyContract
+    web3.eth.estimateGas(transactionObject, function(err, estimateGas){
+      // multiply by 10 hack for testing
+      if(!err)
+        transactionObject.gas = estimateGas * 10;
+
+      MultiplyContract.new(address, price, amount, exeday, premium, position, transactionObject, 
+          function(err, contract){
+            if(err)
+              return TemplateVar.set(template, 'state', {isError: true, error: String(err)});
+
+            if(contract.address) {
+              TemplateVar.set(template, 'state', {isMined: true, address: contract.address, source: source});
+              contractInstance = contract;
+              var contract_address = contract.address;
+              Meteor.call('insert_contracts', address, price, amount, exeday, premium, position, contract_address, abi);
+            }
+          });
+    });
+  },
 
     
 	/**
