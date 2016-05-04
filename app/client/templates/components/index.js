@@ -1,3 +1,5 @@
+// Contracts.find()によって、contracts collectionから全部
+// 取得したいが、動作しない
 Template.contract.helpers({
  contracts: function(){
    Meteor.subscribe('contracts');  //serverのcontractsをsubscribeする
