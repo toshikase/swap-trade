@@ -17,6 +17,7 @@
                     <th>取引実行</th>
                     <th>購入日</th>
                     <th>実行済?</th>
+                    <th>期日到来</th>
                 </tr>
             </thead>
             <tbody>
@@ -45,6 +46,7 @@
     {{/if}}
         <td id="buy_date">{{buy_date}}</td>
         <td id="done">{{done}}</td>
+        <td><button type="button" class="btn btn-warning" id="{{contract_address}}">■</button></td>
     </tr>
     {{/each}}
 </template>

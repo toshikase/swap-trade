@@ -31,8 +31,42 @@ Template.contract.events({
     var done = "false";  //実行されたらtrueになる
     Meteor.call('update_contracts', _id, seller, price, amount, exeday, premium, position, contract_address, abi, buy_date, done, transaction_address);
 
-    //ボタンの書き換え
+    //実行ボタンの書き換え
     $(event.target).removeClass("btn-success").addClass("btn-default");
     $(event.target).text("購入済");
+  }
+});
+
+// below happend when btn-warning is pushed
+Template.contract.events({
+  'click .btn-warning': function(event) {
+    event.preventDefault();
+
+    // get abi & contract_address
+    var abi = MultiplyContract.abi;
+    var contract_address = $(event.target).attr('id');
+    // send transaction to contract
+    // accountはunlockしていないとエラーになる
+    var date = new Date();
+    var current_time = date(exeMonth + "/" + exeDay + "/" + exeYear);
+    var current_time = Date.parse(exeDate);
+    var cnt = web3.eth.contract(abi).at(contract_address);
+    var transaction_address = cnt.Exercise.sendTransaction(300, current_time, {from: web3.eth.accounts[0], gas:500000});
+    alert( "期日が到来して実行されました!!\nトランザクションアドレスは" + transaction_address );
+
+    // 以下、contractsをupdateしてmongoに保存
+    var _id = $(event.target).parent().prevAll().eq(9).text();
+    var seller = $(event.target).parent().prevAll().eq(8).text();
+    var price = $(event.target).parent().prevAll().eq(7).text();
+    var amount = $(event.target).parent().prevAll().eq(6).text();
+    var exeday = $(event.target).parent().prevAll().eq(5).text();
+    var premium = $(event.target).parent().prevAll().eq(4).text();
+    var position = $(event.target).parent().prevAll().eq(3).text();
+    var buy_date = $(event.target).parent().prevAll().eq(1).text();
+    var done = "true";  //実行されたらtrueになる
+    Meteor.call('update_contracts', _id, seller, price, amount, exeday, premium, position, contract_address, abi, buy_date, done, transaction_address);
+
+    //期日ボタンの書き換え
+    //$(event.target).removeClass("btn-warning").addClass("btn-default");
   }
 });
