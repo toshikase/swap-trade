@@ -15,7 +15,7 @@ contract CallOption{
 
     function CallOption(
       address _seller,
-      uint _seller_jpy  ,
+      uint _seller_jpy,
       uint _btc_price,
       uint _btc_amount,
       uint _premium,

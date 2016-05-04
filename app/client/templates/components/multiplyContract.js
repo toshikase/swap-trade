@@ -15,32 +15,34 @@ Note, the MultiplyContract object is now housed in client/lib/contracts/Multiply
 */
 
 // solidity source code
-var source = "" + 
-"contract test {\n" +
-"   function multiply(uint a) returns(uint d) {\n" +
-"       return a * 7;\n" +
-"   }\n" +
-"}\n";
+// var source = "" +
+// "contract test {\n" +
+// "   function multiply(uint a) returns(uint d) {\n" +
+// "       return a * 7;\n" +
+// "   }\n" +
+// "}\n";
+
+var source = "";
 
 // Construct Multiply Contract Object and contract instance
 var contractInstance;
 
 // When the template is rendered
 Template['components_multiplyContract'].onRendered(function(){
-    TemplateVar.set('state', {isInactive: true});
+  TemplateVar.set('state', {isInactive: true});
 });
 
 Template['components_multiplyContract'].helpers({
 
-	/**
-	Get multiply contract source code.
-	
-	@method (source)
-	*/
+  /**
+  Get multiply contract source code.
 
-	'source': function(){
-		return source;
-	},
+  @method (source)
+  */
+
+  'source': function(){
+    return source;
+  },
 });
 
 Template['components_multiplyContract'].events({
@@ -61,61 +63,67 @@ Template['components_multiplyContract'].events({
 
     // Get Abi definition
     var abi = MultiplyContract.abi
+    console.log(abi)
 
-      // assemble the tx object w/ default gas value
-      var transactionObject = {
-        data: MultiplyContract.bytecode, 
-        gasPrice: web3.eth.gasPrice,
-        gas: 5000000,
-        from: web3.eth.accounts[0]
-      };
+    // assemble the tx object w/ default gas value
+    var transactionObject = {
+      data: MultiplyContract.bytecode,
+      gasPrice: web3.eth.gasPrice,
+      gas: 5000000,
+      from: web3.eth.accounts[0]
+    };
     var address = web3.eth.accounts[0];
     var price = event.target.price.value;
     var amount = event.target.amount.value;
-    var exeday = event.target.exeday.value;
+    var exeYear = event.target.exeYear.value;
+    var exeMonth = event.target.exeMonth.value;
+    var exeDay = event.target.exeDay.value;
     var premium = event.target.premium.value;
     var position = event.target.position.value;
+
+    var exeDate = new Date(exeMonth + "/" + exeDay + "/" + exeYear);
+    var parseExeDate = Date.parse(exeDate);
 
     // estimate gas cost then transact new MultiplyContract
     web3.eth.estimateGas(transactionObject, function(err, estimateGas){
       // multiply by 10 hack for testing
       if(!err)
-        transactionObject.gas = estimateGas * 10;
+      transactionObject.gas = estimateGas * 10;
 
-      MultiplyContract.new(address, price, amount, exeday, premium, position, transactionObject, 
-          function(err, contract){
-            if(err)
-              return TemplateVar.set(template, 'state', {isError: true, error: String(err)});
+      MultiplyContract.new(address, price, amount, parseExeDate, premium, position, transactionObject,
+        function(err, contract){
+          if(err)
+          return TemplateVar.set(template, 'state', {isError: true, error: String(err)});
 
-            if(contract.address) {
-              TemplateVar.set(template, 'state', {isMined: true, address: contract.address, source: source});
-              contractInstance = contract;
-              var contract_address = contract.address;
-              Meteor.call('insert_contracts', address, price, amount, exeday, premium, position, contract_address, abi);
-            }
-          });
+          if(contract.address) {
+            TemplateVar.set(template, 'state', {isMined: true, address: contract.address, source: source});
+            contractInstance = contract;
+            var contract_address = contract.address;
+            Meteor.call('insert_contracts', address, price, amount, parseExeDate, premium, position, contract_address, abi);
+          }
+        });
+      });
+    },
+
+
+    /**
+    On Multiply Number Input keyup
+
+    @event (keyup #multiplyValue)
+    */
+
+    "keyup #multiplyValue": function(event, template){
+    // the input value
+    var value = template.find("#multiplyValue").value;
+
+    // call MultiplyContract method `multiply` which should multiply the `value` by 7
+    contractInstance.multiply.call(value, function(err, result){
+      TemplateVar.set(template, 'multiplyResult'
+      , result.toNumber(10));
+
+      if(err)
+      TemplateVar.set(template, 'multplyResult'
+      , String(err));
     });
   },
-
-    
-	/**
-	On Multiply Number Input keyup
-	
-	@event (keyup #multiplyValue)
-	*/
-
-	"keyup #multiplyValue": function(event, template){
-        // the input value
-		var value = template.find("#multiplyValue").value;  
-        
-        // call MultiplyContract method `multiply` which should multiply the `value` by 7
-		contractInstance.multiply.call(value, function(err, result){
-            TemplateVar.set(template, 'multiplyResult'
-                            , result.toNumber(10));
-            
-            if(err)
-                TemplateVar.set(template, 'multplyResult'
-                                , String(err));
-        });
-	},
 });
