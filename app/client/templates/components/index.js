@@ -1,58 +1,10 @@
-//Template.body.onCreated(function bodyOnCreated() {
-//  this.state = new ReactiveDict();
-//  Meteor.subscribe('contracts');
-//});
-// new Mongoは、root/lib内で宣言
-//
-//  下記のように、contractsを定数で設定すれば、helperに適切に数字が渡る
-//  本当はDBから取ってくることが必要
-  var contracts = [
-    {
-      _id: 100,
-      seller: 100,
-      price: 100,
-      amount: 200,
-      exeday: 3999,
-      premium: 100,
-      position: 100,
-      contract_address: 100
-    },
-    {
-      _id: 100,
-      seller: 100,
-      price: 100,
-      amount: 200,
-      exeday: 3999,
-      premium: 100,
-      position: 100
-    },
-    {
-      _id: 100,
-      seller: 100,
-      price: 100,
-      amount: 200,
-      exeday: 3999,
-      premium: 100,
-      position: 100
-    }
-  ];
-//
-// Contracts.find()によって、contracts collectionから全部
-// 取得したいが、動作しない
 Template.contract.helpers({
-  contracts: function(){
-
-   return contracts;
-//   return Contracts.find(); 
-  }
-
-// 下記のように、サーバーサイドで定義した `find_contracts` メソッドを呼び出してもうまくいかない
-// contracts: function(){
-//   Meteor.call('find_contracts');
-// }
+ contracts: function(){
+   Meteor.subscribe('contracts');  //serverのcontractsをsubscribeする
+   return Contracts.find();  //main.jsにcontractsの配列を返す
+ }
 });
 
-//  下記のように、contractsを定数で設定すれば、helperに適切に数字が渡る
 // below happend when btn is pushed
 Template.contract.events({
   'click .btn-success': function(event) {
