@@ -15,12 +15,14 @@ Note, the MultiplyContract object is now housed in client/lib/contracts/Multiply
 */
 
 // solidity source code
-var source = "" +
-"contract test {\n" +
-"   function multiply(uint a) returns(uint d) {\n" +
-"       return a * 7;\n" +
-"   }\n" +
-"}\n";
+// var source = "" +
+// "contract test {\n" +
+// "   function multiply(uint a) returns(uint d) {\n" +
+// "       return a * 7;\n" +
+// "   }\n" +
+// "}\n";
+
+var source = "";
 
 // Construct Multiply Contract Object and contract instance
 var contractInstance;
@@ -72,9 +74,14 @@ Template['components_multiplyContract'].events({
     var address = web3.eth.accounts[0];
     var price = event.target.price.value;
     var amount = event.target.amount.value;
-    var exeday = event.target.exeday.value;
+    var exeYear = event.target.exeYear.value;
+    var exeMonth = event.target.exeMonth.value;
+    var exeDay = event.target.exeDay.value;
     var premium = event.target.premium.value;
     var position = event.target.position.value;
+
+    var exeDate = new Date(exeMonth + "/" + exeDay + "/" + exeYear);
+    var parseExeDate = Date.parse(date);
 
     // estimate gas cost then transact new MultiplyContract
     web3.eth.estimateGas(transactionObject, function(err, estimateGas){
@@ -82,7 +89,7 @@ Template['components_multiplyContract'].events({
       if(!err)
       transactionObject.gas = estimateGas * 10;
 
-      MultiplyContract.new(address, price, amount, exeday, premium, position, transactionObject,
+      MultiplyContract.new(address, price, amount, parseExeDate, premium, position, transactionObject,
         function(err, contract){
           if(err)
           return TemplateVar.set(template, 'state', {isError: true, error: String(err)});
