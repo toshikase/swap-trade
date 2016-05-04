@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //Template.body.onCreated(function bodyOnCreated() {
 //  this.state = new ReactiveDict();
 //  Meteor.subscribe('contracts');
@@ -66,9 +67,17 @@ Template.contract.helpers({
 // contracts: function(){
 //   Meteor.call('find_contracts');
 // }
+=======
+// Contracts.find()によって、contracts collectionから全部
+// 取得したいが、動作しない
+Template.contract.helpers({
+ contracts: function(){
+   Meteor.subscribe('contracts');  //serverのcontractsをsubscribeする
+   return Contracts.find();  //main.jsにcontractsの配列を返す
+ }
+>>>>>>> master
 });
 
-//  下記のように、contractsを定数で設定すれば、helperに適切に数字が渡る
 // below happend when btn is pushed
 Template.contract.events({
   'click .btn-success': function(event) {

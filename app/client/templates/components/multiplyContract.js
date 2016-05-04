@@ -47,11 +47,11 @@ Template['components_multiplyContract'].helpers({
 
 Template['components_multiplyContract'].events({
 
-  /**
-  On "Create New Contract" click
-
-  @event (click .btn-default)
-  */
+	/**
+	On "Create New Contract" click
+	
+	@event (click .btn-default)
+	*/
 
   //	"click .btn-default": function(event, template){ // Create Contract
   "submit .conditions": function(event, template){ // Create Contract
