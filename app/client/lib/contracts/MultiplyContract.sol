@@ -11,7 +11,7 @@ contract MultiplyContract{
     mapping (address => uint) public balanceOfJPY;
     mapping (address => uint) public balanceOfBTC;
     mapping (address => uint) public balanceOfPremium;
-    function CallOption(
+    function MultiplyContract(
       address _seller,
       uint _seller_jpy,
       uint _btc_price,
@@ -33,8 +33,8 @@ contract MultiplyContract{
       balanceOfJPY[buyer] -= premium;
       balanceOfJPY[seller] += premium;
     }
-    function exercise (uint _current_btc_price){
-      if (now < exercise_date) throw;
+    function Exercise (uint _current_btc_price, uint _current_time){
+      if (_current_time < exercise_date) throw;
       if (_current_btc_price < btc_price) throw;
       balanceOfJPY[buyer] -= btc_price * btc_amount;
       balanceOfJPY[seller] += btc_price * btc_amount;

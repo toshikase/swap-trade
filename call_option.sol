@@ -38,8 +38,8 @@ contract CallOption{
       balanceOfJPY[seller] += premium;
     }
 
-    function Exercise (uint _current_btc_price){
-      if (now < exercise_date) throw;
+    function Exercise (uint _current_btc_price, uint _current_time){
+      if (_current_time < exercise_date) throw;
       if (_current_btc_price < btc_price) throw;
       balanceOfJPY[buyer] -= btc_price * btc_amount;
       balanceOfJPY[seller] += btc_price * btc_amount;

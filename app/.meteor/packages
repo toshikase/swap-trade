@@ -47,3 +47,4 @@ standard-minifier-css
 standard-minifier-js
 autopublish
 mrt:cron
+percolatestudio:synced-cron
