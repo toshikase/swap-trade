@@ -47,9 +47,8 @@ Template.contract.events({
     var contract_address = $(event.target).attr('id');
     // send transaction to contract
     // accountはunlockしていないとエラーになる
-    var date = new Date();
-    var current_time = date(exeMonth + "/" + exeDay + "/" + exeYear);
-    var current_time = Date.parse(exeDate);
+    var current_date = new Date;
+    var current_time = Date.parse(current_date);
     var cnt = web3.eth.contract(abi).at(contract_address);
     var transaction_address = cnt.Exercise.sendTransaction(300, current_time, {from: web3.eth.accounts[0], gas:500000});
     alert( "期日が到来して実行されました!!\nトランザクションアドレスは" + transaction_address );
