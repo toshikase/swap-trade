@@ -71,6 +71,8 @@ Template['components_multiplyContract'].events({
       gas: 5000000,
       from: web3.eth.accounts[0]
     };
+
+
     // var issuer = web3.eth.accounts[0];
     var fixedSide = web3.eth.accounts[0];
     var floatedSide = web3.eth.accounts[1];
@@ -82,19 +84,19 @@ Template['components_multiplyContract'].events({
     var expiredYear = event.target.expiredYear.value;
     var expiredMonth = event.target.expiredMonth.value;
     var expiredDay = event.target.expiredDay.value;
-    var flxedRate = event.target.fixtedRate.value;
+    var fixedRate = event.target.fixedRate.value;
     var spread = event.target.spread.value;
     var position = event.target.position.value;
-
     var expiredDate = new Date(expiredDay + "/" + expiredMonth + "/" + expiredYear);
     var parseExpiredDate = Date.parse(expiredDate);
 
+    console.log("hoge");
     // estimate gas cost then transact new MultiplyContract
     web3.eth.estimateGas(transactionObject, function(err, estimateGas){
       if(!err)
       transactionObject.gas = estimateGas * 10;
 
-      MultiplyContract.new(address, fixedSide, floatedSide, price, parseExpiredDate, fixedRate, spread, transactionObject,
+      MultiplyContract.new(fixedSide, floatedSide, price, parseExpiredDate, fixedRate, spread, transactionObject,
         function(err, contract){
           if(err)
           return TemplateVar.set(template, 'state', {isError: true, error: String(err)});
