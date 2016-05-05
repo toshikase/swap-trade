@@ -11,16 +11,28 @@ The balance template
 @constructor
 */
 
+SyncedCron.add({
+  name: 'Crunch some important numbers for the marketing department',
+  schedule: function(parser) {
+    // parser is a later.parse object
+    return parser.text('every 2 hours');
+  },
+  job: function() {
+    var numbersCrunched = CrushSomeNumbers();
+    return numbersCrunched;
+  }
+});
+
 // when the template is rendered
 Template['components_balance'].onRendered(function() {
     // get coinbase address
     var coinbase = web3.eth.coinbase;
-    
+
     // balance update interval
     this.updateBalance = Meteor.setInterval(function() {
         // get the coinbase address balance
         web3.eth.getBalance(coinbase, function(err, result){
-            
+
             // set global temp session balance with result
             Session.set("balance", String(result));
         });
@@ -40,7 +52,7 @@ Template['components_balance'].helpers({
     @method (watchBalance)
     */
 
-    'watchBalance': function(){        
+    'watchBalance': function(){
 		return web3.fromWei(Session.get('balance'), LocalStore.get('etherUnit')).toString(10);
     },
 });
