@@ -29,16 +29,16 @@
     {{#each contracts}}
       <tr>
           <td id="_id">{{_id}}</td>
-          <td id="seller">{{contract_name}}</td>
-          <td id="price">{{client_name}}</td>
-          <td id="amount">{{position}}</td>
+          <td id="contract_name">{{contract_name}}</td>
+          <td id="client_name">{{client_name}}</td>
+          <td id="position">{{position}}</td>
           <td id="exeday">{{exeday}}</td>
       {{#if done}}
           <td><button type="button" class="btn btn-success">実行済</button></td>
       {{else}}
           <td><button type="button" class="btn btn-default">未実行</button></td>
       {{/if}}
-          <td><button type="button" class="btn btn-warning" id="{{_id}}">契約詳細</button></td>
+      <td><button type="button" class="btn btn-warning"><a href ="/contract/{{_id}}" style="color:#fff;">契約詳細</a></button></td>
       </tr>
     {{/each}}
 </template>
