@@ -1,45 +1,64 @@
+<!-- viewが崩れている -->
 <template name="components_info">
     <!-- information パネル -->
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h4>取引履歴</h4>
+            <h4>契約詳細</h4>
         </div>
         <table class="table">
-            <thead>
-                <tr>
-                    <th>商品ID</th>
-                    <th>売手アドレス</th>
-                    <th>BTC価格</th>
-                    <th>BTC数量</th>
-                    <th>実行日</th>
-                    <th>プレミアム</th>
-                    <th>ポジション</th>
-                    <th>購入日</th>
-                    <th>実行済?</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- 取引情報を配列で取得してきて繰り返しで並べる -->
-                {{> transaction}}
-            </tbody>
+          <thead>
+          </thead>
+          <tbody>
+            {{> contract_detail}}
+          </tbody>
         </table>
     </div>
+    <div style="text-align:center"><button type="button" class="btn btn-default"><a href="/view3" style="color:#000;">戻る</a></button></div>
 </template>
 
-<!-- 上記の{{transaction}}に格納 -->
-<template name="transaction">
-    <!-- info.js にtransactionsのヘルパーを記載することで下記の{{}}内に変数が格納される -->
-    {{#each transactions}}
+<template name="contract_detail">
     <tr>
+        <th>商品ID</th>
         <td>{{_id}}</td>
-        <td>{{seller}}</td>
-        <td>{{price}}</td>
-        <td>{{amount}}</td>
-        <td>{{exeday}}</td>
-        <td>{{premium}}</td>
-        <td>{{position}}</td>
-        <td>{{buy_date}}</td>
-        <td>{{done}}</td>
     </tr>
-    {{/each}}
+    <tr>
+        <th>契約名</th>
+        <td>{{contract_name}}</td>
+    </tr>
+    <tr>
+        <th>相手企業名</th>
+        <td>{{client_name}}</td>
+    </tr>
+    <tr>
+        <th>自社ポジション</th>
+        <td>{{position}}</td>
+    </tr>
+    <tr>
+        <th>契約日</th>
+        <td>{{contract_date}}</td>
+    </tr>
+    <tr>
+        <th>期日</th>
+        <td>{{exeday}}</td>
+    </tr>
+    <tr>
+        <th>元本</th>
+        <td>{{principal}}</td>
+    </tr>
+    <tr>
+        <th>固定金利</th>
+        <td>{{fixed_rate}}</td>
+    </tr>
+    <tr>
+        <th>変動金利</th>
+        <td>{{float_rate}}</td>
+    </tr>
+    <tr>
+        <th>実行ステータス</th>
+        {{#if done}}
+            <td>実行済</td>
+        {{else}}
+            <td>未実行</td>
+        {{/if}}
+    </tr>
 </template>

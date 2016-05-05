@@ -56,8 +56,16 @@ Router.route('/view3', {
     name: 'view3'
 });
 
-// Route for view4
-Router.route('/view4', {
-    template: 'views_view4',
-    name: 'view4'
+
+Router.map(function() {
+  this.route('view4', {
+    path: 'contract/:_id',
+    data: function() { return Contracts.findOne({_id: this.params._id});}
+  });
 });
+// Route for contract_show
+//Router.route('/contract/:_id', function () {
+//    this.render('views_view4', {
+//      data: function() { return Contracts.findOne({_id: this.params._id});}
+//    }
+//});
