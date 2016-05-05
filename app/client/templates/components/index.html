@@ -2,22 +2,18 @@
     <!-- 商品一覧パネル -->
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h4>デリバティブ商品一覧</h4>
+            <h4>契約一覧</h4>
         </div>
         <table class="table">
             <thead>
                 <tr>
                     <th>商品ID</th>
-                    <th>売手アドレス</th>
-                    <th>BTC価格</th>
-                    <th>BTC数量</th>
-                    <th>実行日</th>
-                    <th>プレミアム</th>
-                    <th>ポジション</th>
-                    <th>取引実行</th>
-                    <th>購入日</th>
-                    <th>実行済?</th>
-                    <th>期日到来</th>
+                    <th>契約名</th>
+                    <th>相手企業名</th>
+                    <th>自社ポジション</th>
+                    <th>期日</th>
+                    <th>実行ステータス</th>
+                    <th>契約詳細</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,22 +27,18 @@
 <template name="contract">
     <!-- index.js にcontractsのヘルパーを記載することで下記の{{}}内に変数が格納される -->
     {{#each contracts}}
-    <tr>
-        <td id="_id">{{_id}}</td>
-        <td id="seller">{{seller}}</td>
-        <td id="price">{{price}}</td>
-        <td id="amount">{{amount}}</td>
-        <td id="exeday">{{exeday}}</td>
-        <td id="premium">{{premium}}</td>
-        <td id="position">{{position}}</td>
-    {{#if buy_date}}
-        <td><button type="button" class="btn btn-default" id="{{contract_address}}">購入済</button></td>
-    {{else}}
-        <td><button type="button" class="btn btn-success" id="{{contract_address}}">購入</button></td>
-    {{/if}}
-        <td id="buy_date">{{buy_date}}</td>
-        <td id="done">{{done}}</td>
-        <td><button type="button" class="btn btn-warning" id="{{contract_address}}">■</button></td>
-    </tr>
+      <tr>
+          <td id="_id">{{_id}}</td>
+          <td id="seller">{{contract_name}}</td>
+          <td id="price">{{client_name}}</td>
+          <td id="amount">{{position}}</td>
+          <td id="exeday">{{exeday}}</td>
+      {{#if done}}
+          <td><button type="button" class="btn btn-success">実行済</button></td>
+      {{else}}
+          <td><button type="button" class="btn btn-default">未実行</button></td>
+      {{/if}}
+          <td><button type="button" class="btn btn-warning" id="{{_id}}">契約詳細</button></td>
+      </tr>
     {{/each}}
 </template>
