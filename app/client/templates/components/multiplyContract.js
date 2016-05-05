@@ -71,7 +71,9 @@ Template['components_multiplyContract'].events({
       gas: 5000000,
       from: web3.eth.accounts[0]
     };
-    var issuer = web3.eth.accounts[0];
+    // var issuer = web3.eth.accounts[0];
+    var fixedSide = web3.eth.accounts[0];
+    var floatedSide = web3.eth.accounts[1];
     var client = event.target.client.value;
     var price = event.target.price.value;
     var issuedYear = event.target.issuedYear.value;
@@ -81,18 +83,18 @@ Template['components_multiplyContract'].events({
     var expiredMonth = event.target.expiredMonth.value;
     var expiredDay = event.target.expiredDay.value;
     var flxedRate = event.target.fixtedRate.value;
-    var floatingRate = event.target.floatingRate.value;
+    var spread = event.target.spread.value;
     var position = event.target.position.value;
 
-    var exeDate = new Date(exeMonth + "/" + exeDay + "/" + exeYear);
-    var parseExeDate = Date.parse(exeDate);
+    var expiredDate = new Date(expiredDay + "/" + expiredMonth + "/" + expiredYear);
+    var parseExpiredDate = Date.parse(expiredDate);
 
     // estimate gas cost then transact new MultiplyContract
     web3.eth.estimateGas(transactionObject, function(err, estimateGas){
       if(!err)
       transactionObject.gas = estimateGas * 10;
 
-      MultiplyContract.new(address, price, amount, parseExeDate, premium, position, transactionObject,
+      MultiplyContract.new(address, fixedSide, floatedSide, price, parseExpiredDate, fixedRate, spread, transactionObject,
         function(err, contract){
           if(err)
           return TemplateVar.set(template, 'state', {isError: true, error: String(err)});
@@ -101,7 +103,7 @@ Template['components_multiplyContract'].events({
             TemplateVar.set(template, 'state', {isMined: true, address: contract.address, source: source});
             contractInstance = contract;
             var contract_address = contract.address;
-            Meteor.call('insert_contracts', seller, price, amount, parseExeDate, premium, position, contract_address, abi);
+            Meteor.call('insert_contracts', fixedSide, floatedSide, price, parseExpiredDate, fixedRate, spread, contract_address, abi);
           }
         });
       });
@@ -116,16 +118,16 @@ Template['components_multiplyContract'].events({
 
     "keyup #multiplyValue": function(event, template){
     // the input value
-    var value = template.find("#multiplyValue").value;
+      var value = template.find("#multiplyValue").value;
 
-    // call MultiplyContract method `multiply` which should multiply the `value` by 7
-    contractInstance.multiply.call(value, function(err, result){
-      TemplateVar.set(template, 'multiplyResult'
-      , result.toNumber(10));
+      // call MultiplyContract method `multiply` which should multiply the `value` by 7
+      contractInstance.multiply.call(value, function(err, result){
+        TemplateVar.set(template, 'multiplyResult'
+        , result.toNumber(10));
 
-      if(err)
-      TemplateVar.set(template, 'multplyResult'
-      , String(err));
-    });
-  },
+        if(err)
+        TemplateVar.set(template, 'multplyResult'
+        , String(err));
+      });
+    },
 });
