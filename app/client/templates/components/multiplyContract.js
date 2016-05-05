@@ -49,7 +49,7 @@ Template['components_multiplyContract'].events({
 
 	/**
 	On "Create New Contract" click
-	
+
 	@event (click .btn-default)
 	*/
 
@@ -63,7 +63,6 @@ Template['components_multiplyContract'].events({
 
     // Get Abi definition
     var abi = MultiplyContract.abi
-    console.log(abi)
 
     // assemble the tx object w/ default gas value
     var transactionObject = {
@@ -72,13 +71,17 @@ Template['components_multiplyContract'].events({
       gas: 5000000,
       from: web3.eth.accounts[0]
     };
-    var seller = web3.eth.accounts[0];
+    var issuer = web3.eth.accounts[0];
+    var client = event.target.client.value;
     var price = event.target.price.value;
-    var amount = event.target.amount.value;
-    var exeYear = event.target.exeYear.value;
-    var exeMonth = event.target.exeMonth.value;
-    var exeDay = event.target.exeDay.value;
-    var premium = event.target.premium.value;
+    var issuedYear = event.target.issuedYear.value;
+    var issuedMonth = event.target.issuedMonth.value;
+    var issuedDay = event.target.issuedDay.value;
+    var expiredYear = event.target.expiredYear.value;
+    var expiredMonth = event.target.expiredMonth.value;
+    var expiredDay = event.target.expiredDay.value;
+    var flxedRate = event.target.fixtedRate.value;
+    var floatingRate = event.target.floatingRate.value;
     var position = event.target.position.value;
 
     var exeDate = new Date(exeMonth + "/" + exeDay + "/" + exeYear);
