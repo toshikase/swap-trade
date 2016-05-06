@@ -14,14 +14,6 @@ Note, the MultiplyContract object is now housed in client/lib/contracts/Multiply
 @constructor
 */
 
-// solidity source code
-// var source = "" +
-// "contract test {\n" +
-// "   function multiply(uint a) returns(uint d) {\n" +
-// "       return a * 7;\n" +
-// "   }\n" +
-// "}\n";
-
 var source = "";
 
 // Construct Multiply Contract Object and contract instance
@@ -72,10 +64,16 @@ Template['components_multiplyContract'].events({
       from: web3.eth.accounts[0]
     };
 
+    var position = event.target.position.value;
+    if (position  == "fixed" ){
+      var fixedSide = web3.eth.accounts[0];
+      var floatedSide = web3.eth.accounts[1];
 
-    // var issuer = web3.eth.accounts[0];
-    var fixedSide = web3.eth.accounts[0];
-    var floatedSide = web3.eth.accounts[1];
+    } else {
+      var fixedSide = web3.eth.accounts[1];
+      var floatedSide = web3.eth.accounts[0];
+    }
+
     var client = event.target.client.value;
     var price = event.target.price.value;
     var issuedYear = event.target.issuedYear.value;
@@ -86,7 +84,6 @@ Template['components_multiplyContract'].events({
     var expiredDay = event.target.expiredDay.value;
     var fixedRate = event.target.fixedRate.value;
     var spread = event.target.spread.value;
-    var position = event.target.position.value;
     var issuedDate = new Date(issuedDay + "/" + issuedMonth + "/" + issuedYear);
     var parseIssuedDate = Date.parse(issuedDate);
     var expiredDate = new Date(expiredDay + "/" + expiredMonth + "/" + expiredYear);
@@ -108,12 +105,11 @@ Template['components_multiplyContract'].events({
             var contract_address = contract.address;
 
             //Mongoにコントラクト情報を保存
-            Meteor.call('insert_contracts',parseIssuedDate, fixedSide, floatedSide,  price, parseExpiredDate, fixedRate, spread, contract_address, abi);
+            Meteor.call('insert_contracts', issuedDate, expiredDate, client, position, fixedSide, floatedSide, price,  fixedRate, spread, contract_address, abi);
           }
         });
       });
     },
-
 
     /**
     On Multiply Number Input keyup

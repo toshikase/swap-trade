@@ -1,15 +1,15 @@
 if (Meteor.isServer) {
   Meteor.startup(function () {
-
-
     Meteor.methods({
-      'insert_contracts': function(parseIssuedDate, fixedSide, floatedSide, price, parseExpiredDate, fixedRate, spread, contract_address, abi){
+      'insert_contracts': function(issuedDate, expiredDate, client, position, fixedSide, floatedSide, price, fixedRate, spread, contract_address, abi){
         Contracts.insert({
-          parseIssuedDate: parseIssuedDate,
+          issuedDate: issuedDate,
+          expiredDate: expiredDate,
+          client: client,
+          position: position,
           fixedSide: fixedSide,
           floatedSide: floatedSide,
           price: price,
-          parseExpiredDate: parseExpiredDate,
           fixedRate: fixedRate,
           spread: spread,
           contract_address: contract_address,
