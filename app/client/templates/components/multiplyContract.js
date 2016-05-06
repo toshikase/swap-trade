@@ -14,14 +14,6 @@ Note, the MultiplyContract object is now housed in client/lib/contracts/Multiply
 @constructor
 */
 
-// solidity source code
-// var source = "" +
-// "contract test {\n" +
-// "   function multiply(uint a) returns(uint d) {\n" +
-// "       return a * 7;\n" +
-// "   }\n" +
-// "}\n";
-
 var source = "";
 
 // Construct Multiply Contract Object and contract instance
@@ -49,7 +41,7 @@ Template['components_multiplyContract'].events({
 
 	/**
 	On "Create New Contract" click
-	
+
 	@event (click .btn-default)
 	*/
 
@@ -63,7 +55,6 @@ Template['components_multiplyContract'].events({
 
     // Get Abi definition
     var abi = MultiplyContract.abi
-    console.log(abi)
 
     // assemble the tx object w/ default gas value
     var transactionObject = {
@@ -72,24 +63,38 @@ Template['components_multiplyContract'].events({
       gas: 5000000,
       from: web3.eth.accounts[0]
     };
-    var seller = web3.eth.accounts[0];
-    var price = event.target.price.value;
-    var amount = event.target.amount.value;
-    var exeYear = event.target.exeYear.value;
-    var exeMonth = event.target.exeMonth.value;
-    var exeDay = event.target.exeDay.value;
-    var premium = event.target.premium.value;
-    var position = event.target.position.value;
 
-    var exeDate = new Date(exeMonth + "/" + exeDay + "/" + exeYear);
-    var parseExeDate = Date.parse(exeDate);
+    var position = event.target.position.value;
+    if (position  == "fixed" ){
+      var fixedSide = web3.eth.accounts[0];
+      var floatedSide = web3.eth.accounts[1];
+
+    } else {
+      var fixedSide = web3.eth.accounts[1];
+      var floatedSide = web3.eth.accounts[0];
+    }
+
+    var client = event.target.client.value;
+    var price = event.target.price.value;
+    var issuedYear = event.target.issuedYear.value;
+    var issuedMonth = event.target.issuedMonth.value;
+    var issuedDay = event.target.issuedDay.value;
+    var expiredYear = event.target.expiredYear.value;
+    var expiredMonth = event.target.expiredMonth.value;
+    var expiredDay = event.target.expiredDay.value;
+    var fixedRate = event.target.fixedRate.value;
+    var spread = event.target.spread.value;
+    var issuedDate = new Date(issuedDay + "/" + issuedMonth + "/" + issuedYear);
+    var parseIssuedDate = Date.parse(issuedDate);
+    var expiredDate = new Date(expiredDay + "/" + expiredMonth + "/" + expiredYear);
+    var parseExpiredDate = Date.parse(expiredDate);
 
     // estimate gas cost then transact new MultiplyContract
     web3.eth.estimateGas(transactionObject, function(err, estimateGas){
       if(!err)
       transactionObject.gas = estimateGas * 10;
 
-      MultiplyContract.new(address, price, amount, parseExeDate, premium, position, transactionObject,
+      MultiplyContract.new(fixedSide, floatedSide, price, parseExpiredDate, fixedRate, spread, transactionObject,
         function(err, contract){
           if(err)
           return TemplateVar.set(template, 'state', {isError: true, error: String(err)});
@@ -98,12 +103,13 @@ Template['components_multiplyContract'].events({
             TemplateVar.set(template, 'state', {isMined: true, address: contract.address, source: source});
             contractInstance = contract;
             var contract_address = contract.address;
-            Meteor.call('insert_contracts', seller, price, amount, parseExeDate, premium, position, contract_address, abi);
+
+            //Mongoにコントラクト情報を保存
+            Meteor.call('insert_contracts', issuedDate, expiredDate, client, position, fixedSide, floatedSide, price,  fixedRate, spread, contract_address, abi);
           }
         });
       });
     },
-
 
     /**
     On Multiply Number Input keyup
@@ -113,16 +119,16 @@ Template['components_multiplyContract'].events({
 
     "keyup #multiplyValue": function(event, template){
     // the input value
-    var value = template.find("#multiplyValue").value;
+      var value = template.find("#multiplyValue").value;
 
-    // call MultiplyContract method `multiply` which should multiply the `value` by 7
-    contractInstance.multiply.call(value, function(err, result){
-      TemplateVar.set(template, 'multiplyResult'
-      , result.toNumber(10));
+      // call MultiplyContract method `multiply` which should multiply the `value` by 7
+      contractInstance.multiply.call(value, function(err, result){
+        TemplateVar.set(template, 'multiplyResult'
+        , result.toNumber(10));
 
-      if(err)
-      TemplateVar.set(template, 'multplyResult'
-      , String(err));
-    });
-  },
+        if(err)
+        TemplateVar.set(template, 'multplyResult'
+        , String(err));
+      });
+    },
 });

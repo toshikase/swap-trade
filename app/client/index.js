@@ -45,6 +45,14 @@ Meteor.startup(function() {
       // lang = 'en';
     }
   }
+  var helloWorld = function () {
+       console.log('hello world');
+  }
+  new Meteor.Cron({
+    events: {
+       "* * * * *": helloWorld
+    }
+  });
 
   // Setup Moment and Numeral i18n support
   Tracker.autorun(function(){
