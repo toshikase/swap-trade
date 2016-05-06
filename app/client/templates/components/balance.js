@@ -11,7 +11,6 @@ The balance template
 @constructor
 */
 
-
 // when the template is rendered
 Template['components_balance'].onRendered(function() {
     // get coinbase address
