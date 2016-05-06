@@ -20,9 +20,9 @@ contract MultiplyContract{
       fixed_rate = _fixed_rate;
       spread = _spread;
     }
-    function Execution (uint _tibor) {
-      fixed_side.send(price * fixed_rate);
-      floated_side.send(price * (_tibor + spread));
+    function Execution (uint tibor) {
+      fixed_side.send(price*fixed_rate);
+      floated_side.send(price*(tibor+spread));
     }
     function () {
       throw;
