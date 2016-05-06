@@ -87,10 +87,11 @@ Template['components_multiplyContract'].events({
     var fixedRate = event.target.fixedRate.value;
     var spread = event.target.spread.value;
     var position = event.target.position.value;
+    var issuedDate = new Date(issuedDay + "/" + issuedMonth + "/" + issuedYear);
+    var parseIssuedDate = Date.parse(issuedDate);
     var expiredDate = new Date(expiredDay + "/" + expiredMonth + "/" + expiredYear);
     var parseExpiredDate = Date.parse(expiredDate);
 
-    console.log("hoge");
     // estimate gas cost then transact new MultiplyContract
     web3.eth.estimateGas(transactionObject, function(err, estimateGas){
       if(!err)
@@ -105,7 +106,9 @@ Template['components_multiplyContract'].events({
             TemplateVar.set(template, 'state', {isMined: true, address: contract.address, source: source});
             contractInstance = contract;
             var contract_address = contract.address;
-            Meteor.call('insert_contracts', fixedSide, floatedSide, price, parseExpiredDate, fixedRate, spread, contract_address, abi);
+
+            //Mongoにコントラクト情報を保存
+            Meteor.call('insert_contracts',parseIssuedDate, fixedSide, floatedSide,  price, parseExpiredDate, fixedRate, spread, contract_address, abi);
           }
         });
       });
