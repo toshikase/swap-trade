@@ -14,8 +14,9 @@
                     <th>変動金利</th>
                     <th>自社ポジション</th>
                     <th>期日</th>
-                    <th>ステータス</th>
+                    <!-- <th>ステータス</th> -->
                     <th>契約詳細</th>
+                    <th>返済</th>
                 </tr>
             </thead>
             <tbody>
@@ -37,12 +38,13 @@
           <td id="floated_rate">TIBOR + {{spread}}</td>
           <td id="position">{{position}}</td>
           <td id="expired_date">{{expiredDate}}</td>
-      {{#if done}}
-          <td><button type="button" class="btn btn-success">実行済</button></td>
-      {{else}}
-          <td><button type="button" class="btn btn-default">未実行</button></td>
-      {{/if}}
-      <td><button type="button" class="btn btn-warning"><a href ="/contract/{{_id}}" style="color:#fff;">契約詳細</a></button></td>
+          <!-- {{#if done}}
+              <td><button type="button" class="btn btn-success">実行済</button></td>
+          {{else}}
+              <td><button type="button" class="btn btn-default">未実行</button></td>
+          {{/if}} -->
+          <td><button type="button" class="btn btn-warning"><a href ="/contract/{{_id}}" style="color:#fff;">契約詳細</a></button></td>
+          <td><button type="button" class="btn btn-success">返済</button></td>
       </tr>
     {{/each}}
 </template>

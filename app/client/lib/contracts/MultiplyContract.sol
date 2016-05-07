@@ -5,6 +5,7 @@ contract MultiplyContract{
     uint public expired_date;
     uint public fixed_rate;
     uint public spread;
+    mapping (address => uint) public balanceOfJPY;
     function MultiplyContract(
       address _fixed_side,
       address _floated_side,
@@ -20,9 +21,13 @@ contract MultiplyContract{
       fixed_rate = _fixed_rate;
       spread = _spread;
     }
-    function Execution (uint tibor) {
+    function Execution(uint tibor){
       fixed_side.send(price*fixed_rate);
       floated_side.send(price*(tibor+spread));
+    }
+    function Edit(uint _fixed_rate, uint _price){
+      fixed_rate = _fixed_rate;
+      price = _price;
     }
     function () {
       throw;

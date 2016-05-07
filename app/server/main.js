@@ -17,6 +17,14 @@ if (Meteor.isServer) {
         });
       }
     });
+    // var helloWorld = function () {
+    //   console.log('hello world');
+    // }
+    // new Meteor.Cron({
+    //   events: {
+    //      "* * * * *": helloWorld
+    //   }
+    // });
 
     // Meteor.methods({
     //   'update_contracts': function(_id, seller, price, amount, exeday, premium, position, contract_address, abi, buy_date, done, transaction_address){
