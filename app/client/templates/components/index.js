@@ -2,6 +2,10 @@ Template.contract.helpers({
  contracts: function(){
    Meteor.subscribe('contracts');  //serverのcontractsをsubscribeする
    return Contracts.find();  //main.jsにcontractsの配列を返す
+ },
+ users: function(){
+   Meteor.subscribe('users');
+   return Users.find();
  }
 });
 
@@ -17,7 +21,7 @@ Template.contract.events({
    // accountはunlockしていないとエラーになる
    var cnt = web3.eth.contract(abi).at(contract_address);
   //  var transaction_address = cnt.Execution.sendTransaction(1, {from: web3.eth.accounts[0], gas:500000});
-   var transaction_address = cnt.Edit.sendTransaction(8,88888,{from: web3.eth.accounts[0], gas:500000, value:10000});
+   var transaction_address = cnt.Edit.sendTransaction(8,88888,{from: web3.eth.accounts[0], gas:500000, value:1000});
    alert( "購入が完了しました!!\nトランザクションアドレスは" + transaction_address );
 
    // 以下、contractsをupdateしてmongoに保存
