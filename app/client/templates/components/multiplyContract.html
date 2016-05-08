@@ -45,15 +45,34 @@
                     <table class="table main">
                         <tbody>
                             <tr>
-                                <th scope="row">お客様</th>
+                                <th scope="row">想定元本</th>
                                 <td>
-                                    <input type="text" name="client" placeholder="例：丸の内商事" />
+                                    <input type="number" name="price" placeholder="例：500,000,000" />
                                 </td>
                             </tr>
                             <tr>
-                                <th scope="row">想定元本[円]</th>
+                                <th scope="row">固定金利サイド</th>
                                 <td>
-                                    <input type="number" name="price" placeholder="例：500,000,000" />
+                                    <input type="text" name="fixedSide" placeholder="例：丸の内銀行" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">変動金利サイド</th>
+                                <td>
+                                    <input type="text" name="floatedSide" placeholder="例：目黒商事" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">固定金利[%]</th>
+                                <td>
+                                    <input type="number" name="fixedRate" placeholder="例：2.0" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">変動金利[%]</th>
+                                <td>
+                                    TIBOR +
+                                    <input type="number" name="spread" placeholder="例：1.0" />
                                 </td>
                             </tr>
                             <tr>
@@ -72,26 +91,13 @@
                                     <input type="text" name="expiredDay" placeholder="日" />
                                 </td>
                             </tr>
-                            <tr>
-                                <th scope="row">固定金利[%]</th>
-                                <td>
-                                    <input type="number" name="fixedRate" placeholder="例：2.0" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">変動金利[%]</th>
-                                <td>
-                                    TIBOR +
-                                    <input type="number" name="spread" placeholder="例：1.0" />
-                                </td>
-                            </tr>
-                            <tr>
+                            <!-- <tr>
                                 <th scope="row">ポジション</th>
                                 <td>
                                     <label><input type="radio" name="position" value="fixed">固定金利</label>
                                     <label><input type="radio" name="position" value="floated">変動金利</label>
                                 </td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
                 </div>

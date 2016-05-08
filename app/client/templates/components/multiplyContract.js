@@ -64,17 +64,8 @@ Template['components_multiplyContract'].events({
       from: web3.eth.accounts[0]
     };
 
-    var position = event.target.position.value;
-    if (position  == "fixed" ){
-      var fixedSide = web3.eth.accounts[0];
-      var floatedSide = web3.eth.accounts[1];
-
-    } else {
-      var fixedSide = web3.eth.accounts[1];
-      var floatedSide = web3.eth.accounts[0];
-    }
-
-    var client = event.target.client.value;
+    var fixedSide = web3.eth.accounts[0];
+    var floatedSide = web3.eth.accounts[1];
     var price = event.target.price.value;
     var issuedYear = event.target.issuedYear.value;
     var issuedMonth = event.target.issuedMonth.value;
@@ -105,7 +96,7 @@ Template['components_multiplyContract'].events({
             var contract_address = contract.address;
 
             //Mongoにコントラクト情報を保存
-            Meteor.call('insert_contracts', issuedDate, expiredDate, client, position, fixedSide, floatedSide, price,  fixedRate, spread, contract_address, abi);
+            Meteor.call('insert_contracts', issuedDate, expiredDate, fixedSide, floatedSide, price, fixedRate, spread, contract_address, abi);
           }
         });
       });
