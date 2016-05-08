@@ -14,6 +14,7 @@
                     <th>変動金利</th>
                     <th>期日</th>
                     <th>詳細</th>
+                    <th>相手方</th>
                     <th>実行</th>
                 </tr>
             </thead>
@@ -29,13 +30,18 @@
     <!-- index.js にcontractsのヘルパーを記載することで下記の{{}}内に変数が格納される -->
     {{#each contracts}}
       <tr>
-          <td id="price">{{price}}円</td>
+          <td id="price">{{price}} ether</td>
           <td id="fixedSide">丸の内銀行</td>
           <td id="floatedSide">目黒商事</td>
           <td id="fixed_rate">{{fixedRate}}%</td>
           <td id="floated_rate">TIBOR + {{spread}}%</td>
           <td id="expired_date">{{expiredDate.getFullYear}}年{{expiredDate.getMonth}}月{{expiredDate.getDate}}日</td>
           <td><button type="button" class="btn btn-warning"><a href ="/contract/{{_id}}" style="color:#fff;">詳細</a></button></td>
+          {{#if done}}
+              <td><button type="button" class="btn btn-primary"><a href ="/respond/{{_id}}" style="color:#fff;">入金済</a></button></td>
+          {{else}}
+              <td><button type="button" class="btn btn-primary"><a href ="/respond/{{_id}}" style="color:#fff;">未入金</a></button></td>
+          {{/if}}
           <td><button type="button" class="btn btn-success" id="{{contract_address}}">実行</button></td>
       </tr>
     {{/each}}

@@ -12,15 +12,11 @@ Template.contract.events({
 
    // get abi & contract_address
    var abi = MultiplyContract.abi;
-   console.log($(event.target).attr('id'));
    var contract_address = $(event.target).attr('id');
-  //  var contract_address = MultiplyContract.contract_address;
+   //  var contract_address = MultiplyContract.contract_address;
    // send transaction to contract
    // accountはunlockしていないとエラーになる
-   console.log(abi);
-   console.log(contract_address);
    var cnt = web3.eth.contract(abi).at(contract_address);
-   console.log(cnt);
    var transaction_address = cnt.Execution.sendTransaction(1, {from: web3.eth.accounts[0], gas:500000});
   //  var transaction_address = cnt.Edit.sendTransaction(8,88888,{from: web3.eth.accounts[0], gas:500000, value:1000});
    alert( "購入が完了しました!!\nトランザクションアドレスは" + transaction_address );

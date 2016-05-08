@@ -67,8 +67,8 @@ Template['components_multiplyContract'].events({
 
     var fixedSide = web3.eth.accounts[0];
     var floatedSide = web3.eth.accounts[1];
-    var price = event.target.price.value * 1.0e+18;
-    var editedPrice = price * 0.01;
+    var price = event.target.price.value;
+    var editedPrice = price * 1.0e+16;
     var issuedYear = event.target.issuedYear.value;
     var issuedMonth = event.target.issuedMonth.value;
     var issuedDay = event.target.issuedDay.value;

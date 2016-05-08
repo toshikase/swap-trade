@@ -63,6 +63,13 @@ Router.map(function() {
     data: function() { return Contracts.findOne({_id: this.params._id});}
   });
 });
+
+Router.map(function() {
+  this.route('view5', {
+    path: 'respond/:_id',
+    data: function() { return Contracts.findOne({_id: this.params._id});}
+  });
+});
 // Route for contract_show
 //Router.route('/contract/:_id', function () {
 //    this.render('views_view4', {

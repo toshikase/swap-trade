@@ -1,0 +1,62 @@
+<template name="components_respond">
+    <div class="panel panel-default panel-dapp">
+        <div class="panel-heading">
+            <p>デポジット</p>
+        </div>
+        <div class="panel-body">
+            {{#with TemplateVar.get 'state'}}
+            {{#if isError}}
+            <div class="alert alert-warning">
+                デポジット失敗
+                エラー :  "{{error}}".
+            </div>
+            {{/if}}
+
+            {{#if isMining}}
+            <div class="alert alert-info">
+                マイニング中...
+                <span class="badge text-right">
+                    <i class="fa fa-cog fa-spin"></i>
+                </span>
+            </div>
+            {{/if}}
+
+            {{#if isMined}}
+            <div class="alert alert-success">
+                デポジットが完了しました
+            </div>
+            <hr />
+            <label>
+                コントラクトのアドレス :
+            </label>
+            <input type="text" class="form-control"
+            value="{{address}}" placeholder="Address" />
+            <br />
+            <hr />
+            {{/if}}
+
+            {{#if isInactive}}
+            <p class="well well-info"> 商品情報を入力してください </p>
+            <form class="conditions">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>商品情報</h4>
+                    </div>
+                    <table class="table main">
+                        <tbody>
+                            <tr>
+                                <th scope="row">デポジット</th>
+                                <td>
+                                    <input type="number" name="deposit" placeholder="例：10000" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <input type="submit" class="btn btn-default center-block" value=デポジット実行>
+            </form>
+            {{/if}}
+            {{/with}}
+        </div>
+    </div>
+</template>

@@ -17,9 +17,7 @@
                 <tbody>
                     {{#each accounts}}
                     <tr>
-                        <td> 
-                            <input type="text" value="{{address}}" class="web3_address"/>
-                        </td>
+                        <td><input type="text" value="{{address}}" class="web3_address"/></td>
                         <td>{{fromWei balance 'ether'}} ether</td>
                     </tr>
                     {{/each}}

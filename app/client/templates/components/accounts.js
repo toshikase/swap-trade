@@ -12,9 +12,10 @@ The accounts template
 */
 
 // when the template is rendered
-Template["components_accounts"].onRendered(function(){
-});
 
+Template.["components_accounts"].items = function() {
+  return Items.find();
+};
 // template events
 Template['components_accounts'].events({
 });
@@ -31,7 +32,6 @@ Template['components_accounts'].helpers({
 		return web3.fromWei(weiValue, type).toString(10);
 	},
 
-    
 	/**
     Get Eth Accounts
 
@@ -41,4 +41,5 @@ Template['components_accounts'].helpers({
 	'accounts': function(){
 		return EthAccounts.find({});
 	},
+
 });
