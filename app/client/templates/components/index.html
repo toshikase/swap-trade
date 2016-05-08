@@ -30,13 +30,13 @@
     {{#each contracts}}
       <tr>
           <td id="price">{{price}}円</td>
-          <td id="fixedSide">{{fixedSide}}</td>
-          <td id="floatedSide">{{floatedSide}}</td>
+          <td id="fixedSide">丸の内銀行</td>
+          <td id="floatedSide">目黒商事</td>
           <td id="fixed_rate">{{fixedRate}}%</td>
           <td id="floated_rate">TIBOR + {{spread}}%</td>
           <td id="expired_date">{{expiredDate.getFullYear}}年{{expiredDate.getMonth}}月{{expiredDate.getDate}}日</td>
           <td><button type="button" class="btn btn-warning"><a href ="/contract/{{_id}}" style="color:#fff;">詳細</a></button></td>
-          <td><button type="button" class="btn btn-success">実行</button></td>
+          <td><button type="button" class="btn btn-success" id="{{contract_address}}">実行</button></td>
       </tr>
     {{/each}}
 </template>

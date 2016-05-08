@@ -61,12 +61,14 @@ Template['components_multiplyContract'].events({
       data: MultiplyContract.bytecode,
       gasPrice: web3.eth.gasPrice,
       gas: 5000000,
-      from: web3.eth.accounts[0]
+      from: web3.eth.accounts[0],
+      value: web3.toWei(event.target.deposit.value,"ether")
     };
 
     var fixedSide = web3.eth.accounts[0];
     var floatedSide = web3.eth.accounts[1];
-    var price = event.target.price.value;
+    var price = event.target.price.value * 1.0e+18;
+    var editedPrice = price * 0.01;
     var issuedYear = event.target.issuedYear.value;
     var issuedMonth = event.target.issuedMonth.value;
     var issuedDay = event.target.issuedDay.value;
@@ -85,7 +87,7 @@ Template['components_multiplyContract'].events({
       if(!err)
       transactionObject.gas = estimateGas * 10;
 
-      MultiplyContract.new(fixedSide, floatedSide, price, parseExpiredDate, fixedRate, spread, transactionObject,
+      MultiplyContract.new(fixedSide, floatedSide, editedPrice, parseExpiredDate, fixedRate, spread, transactionObject,
         function(err, contract){
           if(err)
           return TemplateVar.set(template, 'state', {isError: true, error: String(err)});
