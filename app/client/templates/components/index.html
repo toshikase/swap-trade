@@ -7,14 +7,12 @@
         <table class="table">
             <thead>
                 <tr>
-                    <!-- <th>ID</th> -->
                     <th>想定元本</th>
                     <th>固定側</th>
                     <th>変動側</th>
                     <th>固定金利</th>
                     <th>変動金利</th>
                     <th>期日</th>
-                    <!-- <th>ステータス</th> -->
                     <th>詳細</th>
                     <th>実行</th>
                 </tr>
@@ -31,18 +29,12 @@
     <!-- index.js にcontractsのヘルパーを記載することで下記の{{}}内に変数が格納される -->
     {{#each contracts}}
       <tr>
-          <!-- <td id="_id">{{_id}}</td> -->
           <td id="price">{{price}}円</td>
           <td id="fixedSide">{{fixedSide}}</td>
           <td id="floatedSide">{{floatedSide}}</td>
           <td id="fixed_rate">{{fixedRate}}%</td>
           <td id="floated_rate">TIBOR + {{spread}}%</td>
           <td id="expired_date">{{expiredDate.getFullYear}}年{{expiredDate.getMonth}}月{{expiredDate.getDate}}日</td>
-          <!-- {{#if done}}
-              <td><button type="button" class="btn btn-success">実行済</button></td>
-          {{else}}
-              <td><button type="button" class="btn btn-default">未実行</button></td>
-          {{/if}} -->
           <td><button type="button" class="btn btn-warning"><a href ="/contract/{{_id}}" style="color:#fff;">詳細</a></button></td>
           <td><button type="button" class="btn btn-success">実行</button></td>
       </tr>

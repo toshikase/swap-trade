@@ -96,7 +96,7 @@ Template['components_multiplyContract'].events({
             var contract_address = contract.address;
 
             //Mongoにコントラクト情報を保存
-            Meteor.call('insert_contracts', issuedDate, expiredDate, fixedSide, floatedSide, price, fixedRate, spread, contract_address, abi);
+            Meteor.call('insert_contracts', fixedSide, floatedSide, price, issuedDate, expiredDate, fixedRate, spread, contract_address, abi);
           }
         });
       });
