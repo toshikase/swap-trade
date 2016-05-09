@@ -65,8 +65,8 @@ Template['components_multiplyContract'].events({
       value: web3.toWei(event.target.deposit.value,"ether")
     };
 
-    var fixedSide = web3.eth.accounts[0];
-    var floatedSide = web3.eth.accounts[1];
+    var fixedSide = web3.eth.accounts[2];
+    var floatedSide = web3.eth.accounts[3];
     var price = event.target.price.value;
     var editedPrice = price * 1.0e+16;
     var issuedYear = event.target.issuedYear.value;
